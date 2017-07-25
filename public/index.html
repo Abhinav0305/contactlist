@@ -11,6 +11,9 @@
 		
 		<div class="container" ng-controller="AppCtrl">
 			<h1>Contact list app</h1>
+			<div>Search : <input type="text" placeholder="patient id" size="20" maxlength="4" ng-model="searchText.patient_id"/>
+			<button ng-click="createCsv()" class="btn btn-primary">Export to CSV</div>
+			<br/><br/>
 			<table class="table">
 				<thead>
 					<tr>
@@ -23,9 +26,9 @@
 				</thead>
 				
 				<tbody>
-					<tr ng-repeat="activity in activityList track by $index">
+					<tr ng-repeat="activity in activityList | filter:searchText track by $index">
 						<td>{{activity.patient_id}}</td>
-						<td>{{activity.duration}}</td>
+						<td>{{activity.duration+" minutes"}}</td>
 						<td>{{activity.rec_time.slice(0,-5).replace("T"," ")}}</td>
 						<td>{{activity.creation_date.slice(0,-5).replace("T"," ")}}</td>
 					</tr>
